@@ -1,0 +1,100 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const User = require("../models/user");
+const trans = require('../models/transactions')
+
+exports.createUser = (req, res, next) => {
+  bcrypt.hash(req.body.password, 10).then(hash => {
+    const user = new User({
+      account: req.body.Account,
+      username: req.body.username,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: hash,
+      balance: req.body.balance,
+      transactions: req.body.transactions
+    });
+    console.log(user);
+    user
+      .save()
+      .then(result => {
+        res.status(201).json({
+          message: "User created!",
+          result: result
+        });
+      })
+      .catch(err => {
+        res.status(500).json({
+          message: "Invalid authentication credentials!"
+        });
+      });
+  });
+}
+
+exports.userLogin = (req, res, next) => {
+  let fetchedUser;
+  User.findOne({ username: req.body.username })
+    .then(user => {
+      if (!user) {
+        console.log(user);
+        return res.status(401).json({
+          message: "Auth failed"
+        });
+      }
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
+    })
+    .then(result => {
+      if (!result) {
+        return res.status(401).json({
+          message: "Auth failed"
+        });
+      }
+      const token = jwt.sign(
+        { username: fetchedUser.username,
+          userId: fetchedUser._id,
+          account: fetchedUser.account,
+          balance: fetchedUser.balance,
+          transactions: fetchedUser.transactions },
+        "secret_this_should_be_longer",
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({
+        token: token,
+        expiresIn: 3600,
+        userId: fetchedUser._id,
+        account: fetchedUser.account,
+        balance: fetchedUser.balance,
+        transactions: fetchedUser.transactions
+      });
+    })
+    .catch(err => {
+      return res.status(401).json({
+        message: "Invalid authentication credentials!"
+      });
+    });
+}
+
+exports.getProfile = (req, res, next) => {
+  User.findOne({account: req.params.account}).then(account => {
+    if(account){
+      res.status(200).json(account);
+    } else {
+      res.status(404).json({  message: "No account in server!"});
+    }
+  });
+
+}
+
+exports.getTransaction = (req, res, next) => {
+  trans.find({accountts: req.params.accountts}).then(transac => {
+    if(transac){
+      console.log(transac)
+      res.status(200).json({transac});
+    } else {
+      res.status(404).json({ message: "No transaction"});
+    }
+  })
+}
