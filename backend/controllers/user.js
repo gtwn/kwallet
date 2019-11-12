@@ -77,10 +77,11 @@ exports.userLogin = (req, res, next) => {
     });
 }
 
+// ดึง profile
 exports.getProfile = (req, res, next) => {
-  User.findOne({account: req.params.account}).then(account => {
+  User.findOne({account: req.params.account}).then(account => {   // หา account
     if(account){
-      res.status(200).json(account);
+      res.status(200).json(account);      // ส่งค่าทั้งหมดใน account กลับไป
     } else {
       res.status(404).json({  message: "No account in server!"});
     }
@@ -88,11 +89,13 @@ exports.getProfile = (req, res, next) => {
 
 }
 
+
+// ดึง transaction ของบัญชี ยังไม่เสร็จ
 exports.getTransaction = (req, res, next) => {
   trans.find({accountts: req.params.accountts}).then(transac => {
     if(transac){
       console.log(transac)
-      res.status(200).json({transac});
+      res.status(200).json({transac});      // ต้องมีตัวแปรของหน้าเว็ปมารับค่า transaction ไปด้วยยังไม่ได้ทำ
     } else {
       res.status(404).json({ message: "No transaction"});
     }

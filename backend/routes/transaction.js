@@ -1,10 +1,10 @@
-const express = require("express");
+// const express = require("express");
 
-const router = express.Router();
-const checkAuth = require("../middleware/check-auth");
-const trans = require('../controllers/transaction');
+// const router = express.Router();
+// const checkAuth = require("../middleware/check-auth");
+// const trans = require('../controllers/transaction');
 
-router.post("", trans.addTransaction);
+// router.post("", trans.addTransaction);
 
 
-module.exports = router;
+// module.exports = router;
