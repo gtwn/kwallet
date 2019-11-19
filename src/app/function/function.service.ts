@@ -61,4 +61,5 @@ export class FunctionService {
       this.router.navigate(['/balance']);
     });
   }
+
 }

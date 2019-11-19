@@ -10,13 +10,15 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { AngularMaterialModule } from './angular-material.module';
-import { PostsModule } from './posts/posts.module';
 import { transferComponent } from './function/transfer/transfer.component';
 import { paymentComponent } from './function/payment/payment.component';
 import { topupComponent } from './function/topup/topup.component';
 import { FormsModule } from '@angular/forms';
 import { balanceComponent } from './balance/balance.component';
 import { profileComponent } from './profile/profile.component';
+import { transactionComponent } from './function/transaction/transaction.component';
+import { MatTableModule } from '@angular/material';
+// import { TableBasicExample } from './function/transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { profileComponent } from './profile/profile.component';
     topupComponent,
     balanceComponent,
     profileComponent,
-    transferComponent
+    transferComponent,
+    // TableBasicExample
+    transactionComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +40,8 @@ import { profileComponent } from './profile/profile.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AngularMaterialModule,
-    PostsModule,
-    FormsModule
+    FormsModule,
+    MatTableModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

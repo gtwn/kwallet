@@ -5,14 +5,15 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Transaction } from './transaction.model';
 
 const BACKEND_URL = environment.apiUrl + '/user/';
 @Injectable({ providedIn: 'root' })
 // tslint:disable-next-line: class-name
 export class profileService {
   private profile: Profile[] = [];
-  // private transaction: Transaction[] = [];
-  // private postsUpdated = new Subject<Transaction[]>();
+  private transac: Transaction[] = [];
+  private postsUpdated = new Subject<Transaction[]>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -27,14 +28,33 @@ export class profileService {
   }
 
   getTransaction(accountts: string) {
-    return this.http.get<{
-      typeT: string,
-      Account: string,
-      amount: string,
-      accountts: string,
-      id: string,
-      create: string
-    }>(BACKEND_URL + accountts);
+    return this.http.get<{ transac: any }>(BACKEND_URL + '/transac/' + accountts)
+    .pipe(
+      map(transData => {
+        return { transac: transData.transac.map(transaction => {
+          return {
+            typeT: transaction.typeT,
+            Account: transaction.account,
+            amount: transaction.amount,
+            accountts: transaction.accountts,
+            datetime: transaction.create
+          };
+        })
+      };
+      })
+    )
+    .subscribe(transformedPosts => {
+      this.transac = transformedPosts.transac;
+      this.postsUpdated.next([...this.transac]);
+    });
+  }
+
+  // getTransaction(accountts: string) {
+  //   return this.http.get<{ transac: any }>(BACKEND_URL + accountts);
+  // }
+
+  getPostUpdateListener() {
+    return this.postsUpdated.asObservable();
   }
 
   // getPosts(accountts: string) {

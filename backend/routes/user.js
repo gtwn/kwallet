@@ -12,7 +12,7 @@ router.post("/login", UserController.userLogin);
 
 router.get("/:account", UserController.getProfile);
 
-router.get("/:accountts", UserController.getTransaction);
+router.get("/transac/:accountts", UserController.getTransaction);
 
 
 

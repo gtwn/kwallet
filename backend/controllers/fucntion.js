@@ -9,6 +9,7 @@ exports.transfer = (req, res ,next) => {
   const ctmAcc = req.body.Account;    // รับค่า Account ที่จะโอนเงินไป
   const oldAcc = req.body.accountts;  // account ปัจจุบันที login ทำการโอนเงิน
   const tamount = req.body.amount;    // จำนวนเงินที่โอน
+  const transin = 'Transfer in';
   // console.log('aa',ctmAcc);
   User.findOne({ account: ctmAcc }).then(result => {    // หา account ที่จะส่งไปใน db อยู่ใน User collection
     if(!result && result.account == oldAcc)   // ไม่มีใน db หรือ ซ้ำกับ account ที่ login
@@ -39,10 +40,20 @@ exports.transfer = (req, res ,next) => {
   addtrans.save().then( result => {   // save ลง db
     console.log(result.typeT);
   })
+
+  const addtransin = new transac({    // ส่วนของเพิ่มใน transaction collection
+    typeT: transin,        // type การทำรายการ
+    amount: req.body.amount,      // จำนวนเงิน
+    account: req.body.accountts,    // ไปยัง account นี้
+    accountts: req.body.Account,    // จาก account นี้
+    created: Date.now()     // วันเวลาปัจจุบัน
+  })
+  addtransin.save().then( result => {   // save ลง db
+    console.log(result.typeT);
+  })
   transac.find({ accountts: req.body.accountts }).then( result => {   // เรียกเช็คดูเฉยๆว่า transaction มันเข้ามั้ย
     console.log(result);
   })
-
 }
 
 // function topup

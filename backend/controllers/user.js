@@ -95,9 +95,9 @@ exports.getTransaction = (req, res, next) => {
   trans.find({accountts: req.params.accountts}).then(transac => {
     if(transac){
       console.log(transac)
-      res.status(200).json({transac});      // ต้องมีตัวแปรของหน้าเว็ปมารับค่า transaction ไปด้วยยังไม่ได้ทำ
+     return res.status(200).json({transac: transac});      // ต้องมีตัวแปรของหน้าเว็ปมารับค่า transaction ไปด้วยยังไม่ได้ทำ
     } else {
-      res.status(404).json({ message: "No transaction"});
+      return res.status(404).json({ message: "No transaction"});
     }
   })
 }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -12,11 +13,17 @@ import { Subscription } from 'rxjs';
 export class IndexComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription;
   // tslint:disable-next-line: no-shadowed-variable
-  constructor(public authService: AuthService , private _renderer2: Renderer2, @Inject(DOCUMENT) private _document: Document) {}
+  constructor(public authService: AuthService , private _renderer2: Renderer2, @Inject(DOCUMENT) private _document: Document,
+  private router: Router) {}
   ngOnInit () {
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
+
+    if (this.authService.getUserId() != null) {
+      this.router.navigate(['/balance']);
+      // location.reload();
+    }
 
     signUpButton.addEventListener('click', () => {
       container.classList.add('right-panel-active');

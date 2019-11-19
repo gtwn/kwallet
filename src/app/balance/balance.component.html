@@ -20,7 +20,7 @@
 			</div>
 >
       <ul>
-          <button class="username" mat-button [routerLink]="['/profile']"  >Username</button>
+          <button class="username" mat-button [routerLink]="['/profile']"  >{{profile.username}}</button>
           <button class="logout" mat-button (click)="onLogout()">Logout</button>
       </ul>
 
@@ -30,7 +30,7 @@
 
         <h1>HOME</h1>
 
-		<button  class="button button0" [routerLink]="['/profile']" >{{profile.balance}}</button>
+		<button  class="button button0" [routerLink]="['/transaction']" >{{profile.balance}}</button>
         <button class="button button1" [routerLink]="['/transfer']">Transfer</button>
         <button class="button button2" [routerLink]="['/payment']">Payment</button>
         <button class="button button3" [routerLink]="['/topup']">Topup</button>
