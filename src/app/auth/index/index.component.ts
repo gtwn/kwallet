@@ -22,6 +22,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
     if (this.authService.getUserId() != null) {
       this.router.navigate(['/balance']);
+      // window.location.reload(true);
       // location.reload();
     }
 

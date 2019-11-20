@@ -26,23 +26,19 @@ export class FunctionService {
       amount: amount,
       accountts: oldAcc};
     // tslint:disable-next-line: radix
-    if ( parseInt(oldBalance) < parseInt(transFer.amount) || oldAcc === Account) {
-      return;
-    } else {
-      const newBalance = parseFloat(oldBalance) - parseFloat(transFer.amount);
-      console.log(newBalance);
-
-      this.http
-        .post(BACKEND_URL + '/transfer' , transFer).subscribe((err) => {
-          console.log('success');
-          localStorage.setItem('balance', newBalance.toString());
-          this.router.navigate(['/balance']);
-          // location.replace('http://localhost:4200/balance');
-        },
-        error => {
-          console.log(error);
-        });
+    this.http
+    .post<{balance: any, message: string}>(BACKEND_URL + '/transfer' , transFer).subscribe(responsedata => {
+      if (responsedata.message === 'Account invalid' || responsedata.message === 'Unable to perform transactions'
+      || responsedata.message === 'Not enough money in the account' ) {
+        console.log(responsedata.message);
+        location.reload();
+        // this.router.navigate(['/transfer']);
       }
+      console.log(responsedata.message);
+      console.log(responsedata.balance);
+      localStorage.setItem('balance', responsedata.balance.toString());
+      this.router.navigate(['/balance']);
+    });
   }
 
   topup(typeT: string, code: string) {
@@ -54,7 +50,6 @@ export class FunctionService {
     };
     this.http.post<{balanced: any , message: string}>(BACKEND_URL + '/topup' , topup).subscribe( responseData => {
       localStorage.setItem('balance', responseData.balanced.toString());
-      console.log(localStorage.getItem('balance'));
       if (responseData.message === 'This code cant use') {
         location.reload();
       }

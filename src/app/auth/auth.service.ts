@@ -100,7 +100,7 @@ export class AuthService {
               now.getTime() + expiresInDuration * 1000
             );
             console.log(expirationDate);
-            this.saveAuthData(token, expirationDate, this.userId, this.account, this.balance, this.transactions);
+            this.saveAuthData(token, expirationDate, this.userId, this.account, this.balance);
             this.router.navigate(['/balance']);
           }
         },
@@ -146,13 +146,12 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string, account: string, balance: number, transactions: string) {
+  private saveAuthData(token: string, expirationDate: Date, userId: string, account: string, balance: number) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);
     localStorage.setItem('account', account);
     localStorage.setItem('balance', balance.toString());
-    localStorage.setItem('transactions', transactions);
   }
 
   private clearAuthData() {
@@ -161,7 +160,6 @@ export class AuthService {
     localStorage.removeItem('userId');
     localStorage.removeItem('account');
     localStorage.removeItem('balance');
-    localStorage.removeItem('transactions');
   }
 
   private getAuthData() {
@@ -170,7 +168,6 @@ export class AuthService {
     const userId = localStorage.getItem('userId');
     const account = localStorage.getItem('account');
     const balance = localStorage.getItem('balance');
-    const transactions = localStorage.getItem('transaction');
     if (!token || !expirationDate) {
       return;
     }
@@ -179,8 +176,7 @@ export class AuthService {
       expirationDate: new Date(expirationDate),
       userId: userId,
       account: account,
-      balance: balance,
-      transactions: transactions
+      balance: balance
     };
   }
 
