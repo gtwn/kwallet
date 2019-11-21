@@ -11,7 +11,7 @@ const app = express();
 mongoose.set('useCreateIndex', true)
 mongoose
   .connect(
-    'mongodb+srv://gtwn:UbvC30ywd06Wfp6D@cluster0-aarl2.mongodb.net/node-angular' ,
+    'mongodb+srv://gtwn:' + process.env.MONGO_ATLAS_PW + '@cluster0-aarl2.mongodb.net/node-angular' ,
     {useNewUrlParser: true , useUnifiedTopology: true , useFindAndModify: false }
   )
   .then(() => {
