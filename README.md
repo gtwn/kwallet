@@ -1,3 +1,10 @@
+npm install 
+
+if error bcryptjs  --> npm install --save bcryptjs
+ng serve
+
+npm run nodeserve
+
 # MeanCourse
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1.
