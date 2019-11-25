@@ -1,0 +1,29 @@
+
+    <body>
+		<!-- <table width = 100% , height = 100% ></table> -->
+		
+        <div class ="head" >
+            <div class ="txthead">
+                KMITL-WALLET
+			</div>
+			<div><mat-card [style]="{width: '500px',margin:'20px 40px',height:'200px',background: 'url(assets/images/AccNo.png)'}">
+				Simple card
+			</mat-card></div>
+      <ul>
+          <button class="myuser" mat-button [routerLink]="['/profile']" > {{profile.account}} </button>
+          <button class="logout" mat-button (click)="onLogout()">Logout</button>
+      </ul>
+
+		</div>
+
+
+
+        <h1>HOME</h1>
+
+		<button  class="button button0" [routerLink]="['/transaction']" >{{profile.balance}}</button>
+        <button class="button button1" [routerLink]="['/transfer']">Transfer</button>
+        <button class="button button2" [routerLink]="['/payment']">Payment</button>
+        <button class="button button3" [routerLink]="['/topup']">Topup</button>
+
+    </body>
+

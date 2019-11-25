@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
     "@angular/router": "^8.0.0",
+    "@material-ui/styles": "^4.6.0",
     "bcrypt": "^2.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
@@ -36,7 +37,7 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.800.0",
+    "@angular-devkit/build-angular": "^0.800.6",
     "@angular/cli": "^8.0.0",
     "@angular/compiler-cli": "^8.0.0",
     "@angular/language-service": "^8.0.0",

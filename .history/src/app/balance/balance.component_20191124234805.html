@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=deivce-width, initial-scale=1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+			integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+			crossorigin="anonymous"
+		/>
+
+		<mat-card>Simple card</mat-card>
+		<title>Balance</title>
+	</head>
+    <body>
+        <!-- <table width = 100% , height = 100% ></table> -->
+        <div class ="head" >
+            <div class ="txthead">
+                KMITL-WALLET
+			</div>
+>
+      <ul>
+          <button class="myuser" mat-button [routerLink]="['/profile']" > {{profile.account}} </button>
+          <button class="logout" mat-button (click)="onLogout()">Logout</button>
+      </ul>
+
+		</div>
+
+
+
+        <h1>HOME</h1>
+
+		<button  class="button button0" [routerLink]="['/transaction']" >{{profile.balance}}</button>
+        <button class="button button1" [routerLink]="['/transfer']">Transfer</button>
+        <button class="button button2" [routerLink]="['/payment']">Payment</button>
+        <button class="button button3" [routerLink]="['/topup']">Topup</button>
+
+    </body>
+</html>

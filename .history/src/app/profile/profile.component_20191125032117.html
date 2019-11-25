@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Transparent Login Form with Bootstrap 4</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+</head>
+
+<body>
+    <mat-card style="margin:50px 60px;">
+    <h1>Profile</h1>
+    <div class="txt">
+        <h2>Account number : {{ profile.account}}</h2>
+        <h2>First name : {{ profile.first}}</h2>
+        <h2>Last name : {{ profile.last}}</h2>
+        <h2>E-mail : {{ profile.email}}</h2>
+    </div>
+
+
+    <div class="btn">
+        <button mat-button routerLink="/balance"  class="btn3" >HOME</button>
+    </div>
+</mat-card>
+
+</body>
+
+</html>

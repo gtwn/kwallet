@@ -9,7 +9,7 @@ import { loginData } from './login.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 
-const BACKEND_URL = environment.apiUrl + '/user/';
+const BACKEND_URL = environment.apiUrl + '/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
